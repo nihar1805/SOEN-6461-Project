@@ -3,7 +3,7 @@
 
 A vending machine that produces electronic or paper tickets, recharges stored-value cards, or refills smart cards or mobile wallets is commonly referred to as a ticket machine or a ticket vending machine (TVM). Users select their tickets and payment method via a display interface and receive their ticket either on paper or loaded onto their smartcard or smartphone.
 
-We have chosen Presto as the TVM. Presto is an electronic fare payment system that offers various payment options such as cash, debit cards, and credit cards for commuters to travel on buses, subways, and trains in Toronto. With ticket vending machines located at TTC subway stations, GO Transit stations, and some buses, commuters can purchase and reload transit fares quickly and easily.
+We have chosen Presto as the TVM. Presto is an electronic fare payment system that offers various payment options such as cash, debit cards, and credit cards for commuters to travel on buses, subways, and trains in Ontario. With ticket vending machines located at TTC subway stations, GO Transit stations, and some buses, commuters can purchase and reload transit fares quickly and easily.
 
 Team ID : Q
 <br>
