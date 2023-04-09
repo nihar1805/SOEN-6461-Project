@@ -13,7 +13,7 @@ class TicketVendingMachine:
 
         self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
         self.tit.pack(side = "top", fill = "both")
-        self.title_label = ctk.CTkLabel(self.tit, text="Welcome to the iGo Ticket Vending Machine")
+        self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM")
         self.title_label.pack(pady=20)
 
         self.language_label = ctk.CTkLabel(self.master, text="Select a language:")
@@ -51,6 +51,12 @@ class TicketVendingMachine:
                 self.language_radio_frame.pack_forget()
                 self.next_button.pack_forget()
 
+                self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                self.tit.pack(side="top", fill="both")
+
+                self.title_label = ctk.CTkLabel(self.tit, text="Welcome to the iGo Ticket Vending Machine")
+                self.title_label.pack(pady=20)
+
                 self.option_label = ctk.CTkLabel(self.master, text="Select an option:")
                 self.option_label.pack(pady=20)
 
@@ -79,6 +85,12 @@ class TicketVendingMachine:
                 self.language_label.pack_forget()
                 self.language_radio_frame.pack_forget()
                 self.next_button.pack_forget()
+
+                self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                self.tit.pack(side="top", fill="both")
+
+                self.title_label = ctk.CTkLabel(self.tit, text="Bienvenue sur le distributeur automatique de billets iGo")
+                self.title_label.pack(pady=20)
 
                 self.option_label = ctk.CTkLabel(self.master, text="Choisir une option:")
                 self.option_label.pack(pady=20)
@@ -116,6 +128,8 @@ class TicketVendingMachine:
                     self.option_label.pack_forget()
                     self.option_radio_frame.pack_forget()
                     self.next_button.pack_forget()
+                    self.tit.pack_forget()
+                    self.title_label.forget()
 
                     self.age_label = ctk.CTkLabel(self.master, text="Select age group:")
                     self.age_label.pack()
@@ -146,9 +160,12 @@ class TicketVendingMachine:
         elif self.option == 'Buy':
             if self.language == 'English':
                 if self.option:
+                    self.next_button.pack_forget()
                     self.option_label.pack_forget()
                     self.option_radio_frame.pack_forget()
                     self.next_button.pack_forget()
+                    self.tit.pack_forget()
+                    self.title_label.forget()
 
                     self.fare_label = ctk.CTkLabel(self.master, text="Select fare type:")
                     self.fare_label.pack(pady=20)
@@ -183,9 +200,12 @@ class TicketVendingMachine:
         if self.option == 'Recharger':
             if self.language == 'French':
                 if self.option:
+                    self.next_button.pack_forget()
                     self.option_label.pack_forget()
                     self.option_radio_frame.pack_forget()
                     self.next_button.pack_forget()
+                    self.tit.pack_forget()
+                    self.title_label.forget()
 
                     self.age_label = ctk.CTkLabel(self.master, text="Sélectionnez le groupe d'âge :")
                     self.age_label.pack(pady=20)
@@ -216,9 +236,12 @@ class TicketVendingMachine:
         elif self.option == 'Acheter':
             if self.language == 'French':
                 if self.option:
+                    self.next_button.pack_forget()
                     self.option_label.pack_forget()
                     self.option_radio_frame.pack_forget()
                     self.next_button.pack_forget()
+                    self.tit.pack_forget()
+                    self.title_label.forget()
 
                     self.fare_label = ctk.CTkLabel(self.master, text="Sélectionnez le type de tarif :")
                     self.fare_label.pack(pady=20)
