@@ -5,21 +5,28 @@ from PIL import ImageTk, Image
 from datetime import datetime
 import re
 
+
 class TicketVendingMachine:
 
     def __init__(self, master):
         self.master = master
         self.master.title("iGo Ticket Vending System")
-        self.master.geometry("700x700")
+        self.master.geometry("1000x700")
         self.master.resizable(False, False)
 
         self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
-        self.tit.pack(side = "top", fill = "both")
-        self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM")
+        self.tit.pack(side="top", fill="both")
+        self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM", font=('Grotesco',30))
         self.title_label.pack(pady=20)
 
-        self.language_label = ctk.CTkLabel(self.master, text="Select a language:")
-        self.language_label.pack(pady=20)
+        image = Image.open("images/img1.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
+
+        self.language_label = ctk.CTkLabel(self.master, text="Select a language:", font=('Davish',20))
+        self.language_label.pack(pady=100)
 
         self.language_var = StringVar()
         self.language_var.set(None)
@@ -27,18 +34,27 @@ class TicketVendingMachine:
         self.language_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
         self.language_radio_frame.pack(pady=20)
 
-        self.english_radio_button = ctk.CTkRadioButton(self.language_radio_frame, text="English", variable=self.language_var,
-                                                value="English")
+        self.english_radio_button = ctk.CTkRadioButton(self.language_radio_frame, text="English",
+                                                       variable=self.language_var,
+                                                       value="English", font=('Davish',20))
         self.english_radio_button.pack(side=LEFT, padx=10)
 
-        self.french_radio_button = ctk.CTkRadioButton(self.language_radio_frame, text="French", variable=self.language_var,
-                                               value="French")
+        self.french_radio_button = ctk.CTkRadioButton(self.language_radio_frame, text="French",
+                                                      variable=self.language_var,
+                                                      value="French", font=('Davish',20))
         self.french_radio_button.pack(side=LEFT, padx=10)
 
-        self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_option)
+        self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_option, corner_radius=0, font=('Davish',20))
         self.next_button.pack(pady=20)
 
     def select_option(self):
+        self.img.place_forget()
+        image = Image.open("images/img3.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
+
         self.language = self.language_var.get()
 
         if self.language == 'English':
@@ -52,11 +68,11 @@ class TicketVendingMachine:
                 self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
                 self.tit.pack(side="top", fill="both")
 
-                self.title_label = ctk.CTkLabel(self.tit, text="Welcome to the iGo Ticket Vending Machine")
+                self.title_label = ctk.CTkLabel(self.tit, text="Welcome to the iGo Ticket Vending Machine", font=('Grotesco',30))
                 self.title_label.pack(pady=20)
 
-                self.option_label = ctk.CTkLabel(self.master, text="Select an option:")
-                self.option_label.pack(pady=20)
+                self.option_label = ctk.CTkLabel(self.master, text="Select an option:", font=('Davish',20))
+                self.option_label.pack(pady=100)
 
                 self.option_var = StringVar()
                 self.option_var.set(None)
@@ -65,14 +81,15 @@ class TicketVendingMachine:
                 self.option_radio_frame.pack(pady=20)
 
                 self.recharge_radio_button = ctk.CTkRadioButton(self.option_radio_frame, text="Recharge card",
-                                                         variable=self.option_var, value="Recharge")
+                                                                variable=self.option_var, value="Recharge", font=('Davish',20))
                 self.recharge_radio_button.pack(side=LEFT, padx=30)
 
                 self.buy_radio_button = ctk.CTkRadioButton(self.option_radio_frame, text="Buy new ticket",
-                                                    variable=self.option_var, value="Buy")
+                                                           variable=self.option_var, value="Buy", font=('Davish',20))
                 self.buy_radio_button.pack(side=LEFT, padx=30)
 
-                self.next_button.configure(text="Next", command=self.select_age_group)
+                self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_age_group, corner_radius=0,
+                                                 font=('Davish', 20))
                 self.next_button.pack(pady=20)
             else:
                 messagebox.showerror("Error", "Please select a language.")
@@ -87,11 +104,12 @@ class TicketVendingMachine:
                 self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
                 self.tit.pack(side="top", fill="both")
 
-                self.title_label = ctk.CTkLabel(self.tit, text="Bienvenue sur le distributeur automatique de billets iGo")
+                self.title_label = ctk.CTkLabel(self.tit,
+                                                text="Bienvenue sur le distributeur automatique de billets iGo", font=('Grotesco',30))
                 self.title_label.pack(pady=20)
 
-                self.option_label = ctk.CTkLabel(self.master, text="Choisir une option:")
-                self.option_label.pack(pady=20)
+                self.option_label = ctk.CTkLabel(self.master, text="Choisir une option:", font=('Davish',20))
+                self.option_label.pack(pady=100)
 
                 self.option_var = StringVar()
                 self.option_var.set(None)
@@ -100,23 +118,26 @@ class TicketVendingMachine:
                 self.option_radio_frame.pack(pady=20)
 
                 self.recharge_radio_button = ctk.CTkRadioButton(self.option_radio_frame, text="Carte de recharge",
-                                                         variable=self.option_var, value="Recharger")
+                                                                variable=self.option_var, value="Recharger", font=('Davish',20))
                 self.recharge_radio_button.pack(side=LEFT, padx=30)
 
                 self.buy_radio_button = ctk.CTkRadioButton(self.option_radio_frame, text="Acheter un ticket",
-                                                    variable=self.option_var, value="Acheter")
+                                                           variable=self.option_var, value="Acheter", font=('Davish',20))
                 self.buy_radio_button.pack(side=LEFT, padx=30)
 
-                self.next_button.configure(text="Prochain", command=self.select_age_group)
+                self.next_button = ctk.CTkButton(self.master, text="Prochain", command=self.select_age_group, corner_radius=0,
+                                                 font=('Davish', 20))
                 self.next_button.pack(pady=20)
             else:
                 messagebox.showerror("Erreur", "Veuillez sélectionner une langue.")
 
-
-
-
-
     def select_age_group(self):
+        self.img.place_forget()
+        image = Image.open("images/img2.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         self.option = self.option_var.get()
 
         if self.option == 'Recharge':
@@ -127,10 +148,15 @@ class TicketVendingMachine:
                     self.option_radio_frame.pack_forget()
                     self.next_button.pack_forget()
                     self.tit.pack_forget()
-                    self.title_label.forget()
+                    self.title_label.pack_forget()
 
-                    self.age_label = ctk.CTkLabel(self.master, text="Select age group:")
-                    self.age_label.pack()
+                    self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                    self.tit.pack(side="top", fill="both")
+                    self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM", font=('Grotesco', 30))
+                    self.title_label.pack(pady=20)
+
+                    self.age_label = ctk.CTkLabel(self.master, text="Select age group:", font=('Davish',20))
+                    self.age_label.pack(pady=100)
 
                     self.age_var = StringVar()
                     self.age_var.set(None)
@@ -138,19 +164,22 @@ class TicketVendingMachine:
                     self.age_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
                     self.age_radio_frame.pack(pady=20)
 
-                    self.adult_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Adult", variable=self.age_var,
-                                                          value="Adult")
+                    self.adult_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Adult",
+                                                                 variable=self.age_var,
+                                                                 value="Adult", font=('Davish',20))
                     self.adult_radio_button.pack(side=LEFT, padx=10)
 
-                    self.child_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Child", variable=self.age_var,
-                                                          value="Child")
+                    self.child_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Child",
+                                                                 variable=self.age_var,
+                                                                 value="Child", font=('Davish',20))
                     self.child_radio_button.pack(side=LEFT, padx=10)
 
-                    self.senior_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Senior", variable=self.age_var,
-                                                           value="Senior")
+                    self.senior_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Senior",
+                                                                  variable=self.age_var,
+                                                                  value="Senior", font=('Davish',20))
                     self.senior_radio_button.pack(side=LEFT, padx=10)
 
-                    self.next_button.configure(text="Next", command=self.select_fare)
+                    self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_fare, font=('Davish',20), corner_radius=0)
                     self.next_button.pack(pady=20)
                 else:
                     messagebox.showerror("Error", "Please select an option.")
@@ -165,8 +194,13 @@ class TicketVendingMachine:
                     self.tit.pack_forget()
                     self.title_label.forget()
 
-                    self.fare_label = ctk.CTkLabel(self.master, text="Select fare type:")
-                    self.fare_label.pack(pady=20)
+                    self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                    self.tit.pack(side="top", fill="both")
+                    self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM", font=('Grotesco', 30))
+                    self.title_label.pack(pady=20)
+
+                    self.fare_label = ctk.CTkLabel(self.master, text="Select fare type:", font=('Davish',20))
+                    self.fare_label.pack(pady=100)
 
                     self.fare_var = StringVar()
                     self.fare_var.set(None)
@@ -177,20 +211,22 @@ class TicketVendingMachine:
                     self.fare_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
                     self.fare_radio_frame.pack(pady=20)
 
-                    self.trip1_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Trip (3)", variable=self.fare_var,
-                                                          value="1 Trip")
+                    self.trip1_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Trip (3)",
+                                                           variable=self.fare_var,
+                                                           value="1 Trip", font=('Davish',20))
                     self.trip1_button.pack(side=LEFT, padx=10)
 
-                    self.trip2_button = ctk.CTkRadioButton(self.fare_radio_frame, text="2 Trip (6)", variable=self.fare_var,
-                                                          value="2 Trip")
+                    self.trip2_button = ctk.CTkRadioButton(self.fare_radio_frame, text="2 Trip (6)",
+                                                           variable=self.fare_var,
+                                                           value="2 Trip", font=('Davish',20))
                     self.trip2_button.pack(side=LEFT, padx=10)
 
                     self.day_trip_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Day Trip (10)",
-                                                           variable=self.fare_var,
-                                                           value="1 Day Trip")
+                                                              variable=self.fare_var,
+                                                              value="1 Day Trip", font=('Davish',20))
                     self.day_trip_button.pack(side=LEFT, padx=10)
 
-                    self.next_button.configure(text="Next", command=self.select_payment_option)
+                    self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_payment_option, font=('Davish',20), corner_radius=0)
                     self.next_button.pack(pady=20)
                 else:
                     messagebox.showerror("Error", "Please select an option.")
@@ -205,8 +241,13 @@ class TicketVendingMachine:
                     self.tit.pack_forget()
                     self.title_label.forget()
 
-                    self.age_label = ctk.CTkLabel(self.master, text="Sélectionnez le groupe d'âge :")
-                    self.age_label.pack(pady=20)
+                    self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                    self.tit.pack(side="top", fill="both")
+                    self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM", font=('Grotesco', 30))
+                    self.title_label.pack(pady=20)
+
+                    self.age_label = ctk.CTkLabel(self.master, text="Sélectionnez le groupe d'âge :", font=('Davish',20))
+                    self.age_label.pack(pady=100)
 
                     self.age_var = StringVar()
                     self.age_var.set(None)
@@ -214,19 +255,22 @@ class TicketVendingMachine:
                     self.age_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
                     self.age_radio_frame.pack(pady=20)
 
-                    self.adult_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Adulte", variable=self.age_var,
-                                                          value="Adulte")
+                    self.adult_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Adulte",
+                                                                 variable=self.age_var,
+                                                                 value="Adulte", font=('Davish',20))
                     self.adult_radio_button.pack(side=LEFT, padx=10)
 
-                    self.child_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Enfant", variable=self.age_var,
-                                                          value="Enfant")
+                    self.child_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Enfant",
+                                                                 variable=self.age_var,
+                                                                 value="Enfant", font=('Davish',20))
                     self.child_radio_button.pack(side=LEFT, padx=10)
 
-                    self.senior_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Senior", variable=self.age_var,
-                                                           value="Senior")
+                    self.senior_radio_button = ctk.CTkRadioButton(self.age_radio_frame, text="Senior",
+                                                                  variable=self.age_var,
+                                                                  value="Senior", font=('Davish',20))
                     self.senior_radio_button.pack(side=LEFT, padx=10)
 
-                    self.next_button.configure(text="Prochain", command=self.select_fare)
+                    self.next_button = ctk.CTkButton(self.master, text="Prochain", command=self.select_fare, corner_radius=0)
                     self.next_button.pack(pady=20)
                 else:
                     messagebox.showerror("Erreur", "Veuillez sélectionner une option.")
@@ -241,8 +285,13 @@ class TicketVendingMachine:
                     self.tit.pack_forget()
                     self.title_label.forget()
 
-                    self.fare_label = ctk.CTkLabel(self.master, text="Sélectionnez le type de tarif :")
-                    self.fare_label.pack(pady=20)
+                    self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
+                    self.tit.pack(side="top", fill="both")
+                    self.title_label = ctk.CTkLabel(self.tit, text="iGo TVM", font=('Grotesco', 30))
+                    self.title_label.pack(pady=20)
+
+                    self.fare_label = ctk.CTkLabel(self.master, text="Sélectionnez le type de tarif :", font=('Davish',20))
+                    self.fare_label.pack(pady=100)
 
                     self.fare_var = StringVar()
                     self.fare_var.set(None)
@@ -253,25 +302,34 @@ class TicketVendingMachine:
                     self.fare_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
                     self.fare_radio_frame.pack(pady=20)
 
-                    self.trip1_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 voyage (3)", variable=self.fare_var,
-                                                          value="1 voyage")
+                    self.trip1_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 voyage (3)",
+                                                           variable=self.fare_var,
+                                                           value="1 voyage", font=('Davish',20))
                     self.trip1_button.pack(side=LEFT, padx=10)
 
-                    self.trip2_button = ctk.CTkRadioButton(self.fare_radio_frame, text="2 voyage (6)", variable=self.fare_var,
-                                                          value="2 voyage")
-                    self.trip2_button.pack(side=LEFT,padx=10)
-
-                    self.day_trip_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Excursion d'une journée (10)",
+                    self.trip2_button = ctk.CTkRadioButton(self.fare_radio_frame, text="2 voyage (6)",
                                                            variable=self.fare_var,
-                                                           value="Excursion d'une journée")
+                                                           value="2 voyage", font=('Davish',20))
+                    self.trip2_button.pack(side=LEFT, padx=10)
+
+                    self.day_trip_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                              text="Excursion d'une journée (10)",
+                                                              variable=self.fare_var,
+                                                              value="Excursion d'une journée", font=('Davish',20))
                     self.day_trip_button.pack(side=LEFT, padx=10)
 
-                    self.next_button.configure(text="Prochain", command=self.select_payment_option)
+                    self.next_button = ctk.CTkButton(self.master, text="Prochain", command=self.select_payment_option, font=('Davish',20), corner_radius=0)
                     self.next_button.pack(pady=20)
                 else:
                     messagebox.showerror("Erreur", "Veuillez sélectionner une option.")
 
     def select_fare(self):
+        self.img.place_forget()
+        image = Image.open("images/img4.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         self.age = self.age_var.get()
 
         if self.language == 'English':
@@ -279,8 +337,8 @@ class TicketVendingMachine:
                 self.age_label.pack_forget()
                 self.age_radio_frame.pack_forget()
                 self.next_button.pack_forget()
-                self.fare_label = ctk.CTkLabel(self.master, text="Select fare type:")
-                self.fare_label.pack(pady=20)
+                self.fare_label = ctk.CTkLabel(self.master, text="Select fare type:", font=('Davish',20))
+                self.fare_label.pack(pady=100)
 
                 self.fare_var = StringVar()
                 self.fare_var.set(None)
@@ -293,44 +351,46 @@ class TicketVendingMachine:
 
                 if self.age == "Adult":
                     self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Month Pass (100)",
-                                                            variable=self.fare_var, value="Monthly")
+                                                                   variable=self.fare_var, value="Monthly", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT, padx=20)
 
                     self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Week Pass (50)",
-                                                           variable=self.fare_var, value="Weekly")
+                                                                  variable=self.fare_var, value="Weekly", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="1 Day Pass (10)",
-                                                          variable=self.fare_var, value="Daily")
+                                                                 variable=self.fare_var, value="Daily", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
                 elif self.age == "Child":
-                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Child 1 Month Pass (50)",
-                                                            variable=self.fare_var, value="Child Monthly")
+                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                   text="Child 1 Month Pass (50)",
+                                                                   variable=self.fare_var, value="Child Monthly", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT, padx=20)
 
                     self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Child 1 Week Pass (30)",
-                                                           variable=self.fare_var, value="Child Weekly")
+                                                                  variable=self.fare_var, value="Child Weekly", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Child 1 Day Pass (5)",
-                                                          variable=self.fare_var, value="Child Daily")
+                                                                 variable=self.fare_var, value="Child Daily", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
                 elif self.age == "Senior":
-                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Senior 1 Month Pass (75)",
-                                                            variable=self.fare_var, value="Senior Monthly")
+                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                   text="Senior 1 Month Pass (75)",
+                                                                   variable=self.fare_var, value="Senior Monthly", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT, padx=20)
 
                     self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Senior 1 Week Pass (40)",
-                                                           variable=self.fare_var, value="Senior Weekly")
+                                                                  variable=self.fare_var, value="Senior Weekly", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Senior 1 Day Pass (7)",
-                                                          variable=self.fare_var, value="Senior Daily")
+                                                                 variable=self.fare_var, value="Senior Daily", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
-                self.next_button.configure(text="Next", command=self.select_payment_option)
+                self.next_button = ctk.CTkButton(self.master, text="Next", command=self.select_payment_option, corner_radius=0, font=('Davish',20))
                 self.next_button.pack(pady=20)
 
             else:
@@ -343,8 +403,8 @@ class TicketVendingMachine:
                 self.age_label.pack_forget()
                 self.age_radio_frame.pack_forget()
                 self.next_button.pack_forget()
-                self.fare_label = ctk.CTkLabel(self.master, text="Sélectionnez le type de tarif :")
-                self.fare_label.pack(pady=20)
+                self.fare_label = ctk.CTkLabel(self.master, text="Sélectionnez le type de tarif :", font=('Davish',20))
+                self.fare_label.pack(pady=100)
 
                 self.fare_var = StringVar()
                 self.fare_var.set(None)
@@ -357,51 +417,60 @@ class TicketVendingMachine:
 
                 if self.age == "Adulte":
                     self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass 1 mois (100)",
-                                                            variable=self.fare_var, value="Mensuel")
+                                                                   variable=self.fare_var, value="Mensuel", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT)
 
                     self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass 1 semaine (50)",
-                                                           variable=self.fare_var, value="Hebdomadaire")
+                                                                  variable=self.fare_var, value="Hebdomadaire", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass 1 jour (10)",
-                                                          variable=self.fare_var, value="Quotidien")
+                                                                 variable=self.fare_var, value="Quotidien", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
                 elif self.age == "Enfant":
-                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass Enfant 1 Mois (50)",
-                                                            variable=self.fare_var, value="Enfant Mensuel")
+                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                   text="Pass Enfant 1 Mois (50)",
+                                                                   variable=self.fare_var, value="Enfant Mensuel", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT)
 
-                    self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass 1 Semaine Enfant (30)",
-                                                           variable=self.fare_var, value="Enfant Hebdomadaire")
+                    self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                  text="Pass 1 Semaine Enfant (30)",
+                                                                  variable=self.fare_var, value="Enfant Hebdomadaire", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass Enfant 1 Jour (5)",
-                                                          variable=self.fare_var, value="Enfant Quotidien")
+                                                                 variable=self.fare_var, value="Enfant Quotidien", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
                 elif self.age == "Senior":
-                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Forfait Sénior 1 Mois (75)",
-                                                            variable=self.fare_var, value="Sénior Mensuel")
+                    self.monthly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                   text="Forfait Sénior 1 Mois (75)",
+                                                                   variable=self.fare_var, value="Sénior Mensuel", font=('Davish',20))
                     self.monthly_radio_button.pack(side=LEFT)
 
-                    self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Forfait Sénior 1 Semaine (40)",
-                                                           variable=self.fare_var, value="Senior Hebdomadaire")
+                    self.weekly_radio_button = ctk.CTkRadioButton(self.fare_radio_frame,
+                                                                  text="Forfait Sénior 1 Semaine (40)",
+                                                                  variable=self.fare_var, value="Senior Hebdomadaire", font=('Davish',20))
                     self.weekly_radio_button.pack(side=LEFT, padx=20)
 
                     self.daily_radio_button = ctk.CTkRadioButton(self.fare_radio_frame, text="Pass 1 jour sénior (7)",
-                                                          variable=self.fare_var, value="Sénior Quotidien")
+                                                                 variable=self.fare_var, value="Sénior Quotidien", font=('Davish',20))
                     self.daily_radio_button.pack(side=LEFT, padx=20)
 
-                self.next_button.configure(text="Prochain", command=self.select_payment_option)
+                self.next_button = ctk.CTkButton(self.master, text="Prochain", command=self.select_payment_option, corner_radius=0, font=('Davish',20))
                 self.next_button.pack(pady=20)
 
             else:
                 messagebox.showerror("Erreur", "Veuillez sélectionner une tranche d'âge.")
 
-
     def select_payment_option(self):
+        self.img.place_forget()
+        image = Image.open("images/img5.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         self.fare = self.fare_var.get()
         self.prc = self.fare_prc.get()
         self.option = self.option_var.get()
@@ -442,16 +511,14 @@ class TicketVendingMachine:
             else:
                 self.prc.set = 0
 
-
-
         if self.language == "English":
             if self.fare:
                 self.fare_label.pack_forget()
                 self.fare_radio_frame.pack_forget()
                 self.next_button.pack_forget()
 
-                self.payment_label = ctk.CTkLabel(self.master, text="Select payment option:")
-                self.payment_label.pack(pady=20)
+                self.payment_label = ctk.CTkLabel(self.master, text="Select payment option:", font=('Davish',20))
+                self.payment_label.pack(pady=100)
 
                 self.payment_var = StringVar()
                 self.payment_var.set(None)
@@ -459,15 +526,17 @@ class TicketVendingMachine:
                 self.payment_radio_frame = ctk.CTkFrame(master=self.master, fg_color="white")
                 self.payment_radio_frame.pack(pady=20)
 
-                self.cash_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Cash", variable=self.payment_var,
-                                                     value="Cash")
+                self.cash_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Cash",
+                                                            variable=self.payment_var,
+                                                            value="Cash", font=('Davish',20))
                 self.cash_radio_button.pack(side=LEFT)
 
-                self.card_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Card", variable=self.payment_var,
-                                                     value="Card")
+                self.card_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Card",
+                                                            variable=self.payment_var,
+                                                            value="Card", font=('Davish',20))
                 self.card_radio_button.pack(side=LEFT)
 
-                self.next_button.configure(text="Pay", command=self.print_receipt)
+                self.next_button = ctk.CTkButton(self.master, text="Pay", command=self.print_receipt, font=('Davish',20), corner_radius=0)
                 self.next_button.pack(pady=20)
             else:
                 messagebox.showerror("Error", "Please select a fare type.")
@@ -478,8 +547,8 @@ class TicketVendingMachine:
                 self.fare_radio_frame.pack_forget()
                 self.next_button.pack_forget()
 
-                self.payment_label = ctk.CTkLabel(self.master, text="Sélectionnez l'option de paiement :")
-                self.payment_label.pack(pady=20)
+                self.payment_label = ctk.CTkLabel(self.master, text="Sélectionnez l'option de paiement :", font=('Davish',20))
+                self.payment_label.pack(pady=100)
 
                 self.payment_var = StringVar()
                 self.payment_var.set(None)
@@ -487,21 +556,29 @@ class TicketVendingMachine:
                 self.payment_radio_frame = ctk.CTkFrame(self.master)
                 self.payment_radio_frame.pack(pady=20)
 
-                self.cash_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Espèces", variable=self.payment_var,
-                                                     value="Espèces")
+                self.cash_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Espèces",
+                                                            variable=self.payment_var,
+                                                            value="Espèces", font=('Davish',20))
                 self.cash_radio_button.pack(side=LEFT)
 
-                self.card_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Carte", variable=self.payment_var,
-                                                     value="Carte")
+                self.card_radio_button = ctk.CTkRadioButton(self.payment_radio_frame, text="Carte",
+                                                            variable=self.payment_var,
+                                                            value="Carte", font=('Davish',20))
                 self.card_radio_button.pack(side=LEFT)
 
-                self.next_button.configure(text="Payer", command=self.print_receipt)
+                self.next_button = ctk.CTkButton(self.master, text="Payer", command=self.print_receipt, font=('Davish',20), corner_radius=0)
                 self.next_button.pack(pady=20)
             else:
                 messagebox.showerror("Erreur", "Veuillez sélectionner un type de tarif.")
-    def print_receipt(self):
-        self.payment_option = self.payment_var.get()
 
+    def print_receipt(self):
+        self.img.place_forget()
+        image = Image.open("images/img6.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
+        self.payment_option = self.payment_var.get()
         if self.language == "English":
             if self.payment_option:
                 self.payment_label.pack_forget()
@@ -516,31 +593,31 @@ class TicketVendingMachine:
                 self.receipt += f"Amount Paid: {self.prc}\n"
 
                 if self.payment_option == "Cash":
-                    self.amount_label = ctk.CTkLabel(self.master, text="Enter amount:")
-                    self.amount_label.pack(pady=20)
+                    self.amount_label = ctk.CTkLabel(self.master, text="Enter amount:", font=('Davish',20))
+                    self.amount_label.pack(pady=100)
 
                     self.amount_entry = ctk.CTkEntry(self.master)
                     self.amount_entry.pack(pady=20)
 
-                    self.pay_button = ctk.CTkButton(self.master, text="Pay", command=self.calculate_change)
+                    self.pay_button = ctk.CTkButton(self.master, text="Pay", command=self.calculate_change, font=('Davish',20), corner_radius=0)
                     self.pay_button.pack(pady=20)
                 else:
                     self.success = "Payment Successful\n"
                     self.success += f"Timestamp: {str(datetime.now())}\n"
-                    self.print_success = ctk.CTkLabel(self.master, text=self.success)
-                    self.print_success.pack(pady=20)
+                    self.print_success = ctk.CTkLabel(self.master, text=self.success, font=('Davish',20))
+                    self.print_success.pack(pady=100)
 
                     self.paper_receipt = ctk.CTkButton(self.master, text="Print Paper Receipt",
-                                                       command=self.print_paper_receipt)
+                                                       command=self.print_paper_receipt, font=('Davish',20), corner_radius=0)
                     self.paper_receipt.pack(pady=20)
 
                     self.email_receipt = ctk.CTkButton(self.master, text="Send Email Receipt",
-                                                       command=self.select_email_receipt)
+                                                       command=self.select_email_receipt, font=('Davish',20), corner_radius=0)
                     self.email_receipt.pack(pady=20)
             else:
                 messagebox.showerror("Error", "Please select a payment option.")
 
-        elif(self.language == "French"):
+        elif (self.language == "French"):
             if self.payment_option:
                 self.payment_label.pack_forget()
                 self.payment_radio_frame.pack_forget()
@@ -554,31 +631,40 @@ class TicketVendingMachine:
                 self.receipt += f"Le montant payé: {self.prc}\n"
 
                 if self.payment_option == "Espèces":
-                    self.amount_label = ctk.CTkLabel(self.master, text="Entrer le montant:")
-                    self.amount_label.pack(pady=20)
+                    self.amount_label = ctk.CTkLabel(self.master, text="Entrer le montant:", font=('Davish',20))
+                    self.amount_label.pack(pady=100)
 
                     self.amount_entry = ctk.CTkEntry(self.master)
                     self.amount_entry.pack(pady=20)
 
-                    self.pay_button = ctk.CTkButton(self.master, text="Payer", command=self.calculate_change)
+                    self.pay_button = ctk.CTkButton(self.master, text="Payer", command=self.calculate_change, font=('Davish',20), corner_radius=0)
                     self.pay_button.pack(pady=20)
                 else:
                     self.success = "Paiement réussi\n"
                     self.success += f"Horodatage: {str(datetime.now())}\n"
                     self.print_success = ctk.CTkLabel(self.master, text=self.success)
-                    self.print_success.pack(pady=20)
+                    self.print_success.pack(pady=50)
 
                     self.paper_receipt = ctk.CTkButton(self.master, text="Imprimer le reçu papier",
-                                                       command=self.print_paper_receipt)
+                                                       command=self.print_paper_receipt, font=('Davish',20), corner_radius=0)
                     self.paper_receipt.pack(pady=20)
 
                     self.email_receipt = ctk.CTkButton(self.master, text="Envoyer un reçu par e-mail",
-                                                       command=self.select_email_receipt)
+                                                       command=self.select_email_receipt, font=('Davish',20), corner_radius=0)
                     self.email_receipt.pack(pady=20)
             else:
                 messagebox.showerror("Erreur", "Veuillez sélectionner une option de paiement.")
 
     def calculate_change(self):
+        self.amount_label.pack_forget()
+        self.amount_entry.pack_forget()
+        self.pay_button.pack_forget()
+        self.img.place_forget()
+        image = Image.open("images/img3.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         self.amount = self.amount_entry.get()
 
         if self.language == "English":
@@ -593,13 +679,15 @@ class TicketVendingMachine:
                         self.success = "Payment Successful\n"
                         self.success += f"Timestamp: {str(datetime.now())}\n"
 
-                        self.print_success = ctk.CTkLabel(self.master, text=self.success)
-                        self.print_success.pack(pady=20)
+                        self.print_success = ctk.CTkLabel(self.master, text=self.success, font=('Davish',20))
+                        self.print_success.pack(pady=100)
 
-                        self.paper_receipt = ctk.CTkButton(self.master, text="Print Paper Receipt", command=self.print_paper_receipt)
+                        self.paper_receipt = ctk.CTkButton(self.master, text="Print Paper Receipt",
+                                                           command=self.print_paper_receipt, font=('Davish',20), corner_radius=0)
                         self.paper_receipt.pack(pady=20)
 
-                        self.email_receipt = ctk.CTkButton(self.master, text="Send Email Receipt", command=self.select_email_receipt)
+                        self.email_receipt = ctk.CTkButton(self.master, text="Send Email Receipt",
+                                                           command=self.select_email_receipt, font=('Davish',20), corner_radius=0)
                         self.email_receipt.pack(pady=20)
                     else:
                         messagebox.showerror("Error", "Insufficient amount.")
@@ -624,14 +712,15 @@ class TicketVendingMachine:
                         self.success = "Paiement réussi\n"
                         self.success += f"Horodatage: {str(datetime.now())}\n"
 
-                        self.print_success = ctk.CTkLabel(self.master, text=self.success)
-                        self.print_success.pack(pady=20)
+                        self.print_success = ctk.CTkLabel(self.master, text=self.success, font=('Davish',20))
+                        self.print_success.pack(pady=100)
 
                         self.paper_receipt = ctk.CTkButton(self.master, text="Imprimer le reçu papier",
-                                                           command=self.print_paper_receipt)
+                                                           command=self.print_paper_receipt, font=('Davish',20), corner_radius=0)
                         self.paper_receipt.pack(pady=20)
 
-                        self.email_receipt = ctk.CTkButton(self.master, text="Envoyer un reçu par e-mail", command=self.select_email_receipt)
+                        self.email_receipt = ctk.CTkButton(self.master, text="Envoyer un reçu par e-mail",
+                                                           command=self.select_email_receipt, font=('Davish',20), corner_radius=0)
                         self.email_receipt.pack(pady=20)
                     else:
                         messagebox.showerror("Erreur", "Montant insuffisant.")
@@ -644,6 +733,12 @@ class TicketVendingMachine:
             # ctk.CTkButton(root, text="Ferme la fenêtre", font=("Calibri", 12, "bold"), command=self.close).pack(pady=10)
 
     def print_paper_receipt(self):
+        self.img.place_forget()
+        image = Image.open("images/img1.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         if self.payment_option == "Cash":
             self.amount_label.pack_forget()
             self.pay_button.pack_forget()
@@ -656,16 +751,22 @@ class TicketVendingMachine:
             self.paper_receipt.pack_forget()
             self.print_success.pack_forget()
         if self.language == "English":
-            self.email_label = ctk.CTkLabel(self.master, text="Paper Receipt:\n")
-            self.email_label.pack(pady=20)
+            self.email_label = ctk.CTkLabel(self.master, text="Paper Receipt:\n", font=('Davish',20))
+            self.email_label.pack(pady=100)
         else:
-            self.email_label = ctk.CTkLabel(self.master, text="Reçu papier:\n")
-            self.email_label.pack(pady=20)
+            self.email_label = ctk.CTkLabel(self.master, text="Reçu papier:\n", font=('Davish',20))
+            self.email_label.pack(pady=100)
 
-        self.print_label = ctk.CTkLabel(self.master, text=self.receipt)
+        self.print_label = ctk.CTkLabel(self.master, text=self.receipt, font=('Davish',20))
         self.print_label.pack(pady=20)
 
     def select_email_receipt(self):
+        self.img.place_forget()
+        image = Image.open("images/img2.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         if self.payment_option == "Cash":
             self.amount_label.pack_forget()
             self.pay_button.pack_forget()
@@ -679,41 +780,46 @@ class TicketVendingMachine:
             self.print_success.pack_forget()
         if self.language == "English":
             # self.email_receipt.pack_forget()
-            self.email_label = ctk.CTkLabel(self.master, text="Enter E-mail id:")
-            self.email_label.pack(pady=20)
+            self.email_label = ctk.CTkLabel(self.master, text="Enter E-mail id:", font=('Davish',20))
+            self.email_label.pack(pady=100)
 
             self.email_entry = ctk.CTkEntry(self.master)
             self.email_entry.pack(pady=20)
 
             self.email_receipt = ctk.CTkButton(self.master, text="Send",
-                                               command=self.select_send)
+                                               command=self.select_send, font=('Davish',20), corner_radius=0)
             self.email_receipt.pack(pady=20)
 
         elif self.language == "French":
-            self.email_label = ctk.CTkLabel(self.master, text="Entrez l'identifiant e-mail :")
-            self.email_label.pack(pady=20)
+            self.email_label = ctk.CTkLabel(self.master, text="Entrez l'identifiant e-mail :", font=('Davish',20))
+            self.email_label.pack(pady=100)
 
             self.email_entry = ctk.CTkEntry(self.master)
             self.email_entry.pack(pady=20)
 
             self.email_receipt = ctk.CTkButton(self.master, text="Envoyer",
-                                               command=self.select_send)
+                                               command=self.select_send, font=('Davish',20), corner_radius=0)
             self.email_receipt.pack(pady=20)
 
-
     def select_send(self):
+        self.img.place_forget()
+        image = Image.open("images/img5.jpg")
+        img = image.resize((1500, 800))
+        img1 = ImageTk.PhotoImage(img)
+        self.img = ctk.CTkLabel(self.master, image=img1, text="", width=0, height=0)
+        self.img.place(x=0, y=100)
         self.regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
         self.email = self.email_entry.get()
         if self.language == "English":
             if re.fullmatch(self.regex, self.email):
-                self.print_email = ctk.CTkLabel(self.master, text="Email Receipt Sent Successfully")
+                self.print_email = ctk.CTkLabel(self.master, text="Email Receipt Sent Successfully", font=('Davish',20))
                 self.print_email.pack(pady=20)
             else:
                 messagebox.showerror("Error", "Please enter a valid e-mail.")
 
         elif self.language == "French":
             if re.fullmatch(self.regex, self.email):
-                self.print_email = ctk.CTkLabel(self.master, text="Reçu par e-mail envoyé avec succès")
+                self.print_email = ctk.CTkLabel(self.master, text="Reçu par e-mail envoyé avec succès", font=('Davish',20))
                 self.print_email.pack(pady=20)
             else:
                 messagebox.showerror("Erreur", "Veuillez entrer un e-mail valide.")
@@ -725,14 +831,14 @@ class TicketVendingMachine:
     def close(self):
         self.master.quit()
 
+
 if __name__ == "__main__":
     ctk.set_appearance_mode("System")
 
     # Sets the color of the widgets
     # Supported themes: green, dark-blue, blue
-    ctk.set_default_color_theme("blue")
+    ctk.set_default_color_theme("green")
     root = ctk.CTk()
 
     ticket_vending_system = TicketVendingMachine(root)
     root.mainloop()
-
