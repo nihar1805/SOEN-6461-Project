@@ -10,6 +10,7 @@ class TicketVendingMachine:
         self.master.title("iGo Ticket Vending System")
         self.master.geometry("700x700")
         self.master.resizable(False, False)
+
         self.tit = ctk.CTkFrame(master=self.master, fg_color="orange")
         self.tit.pack(side = "top", fill = "both")
         self.title_label = ctk.CTkLabel(self.tit, text="Welcome to the iGo Ticket Vending Machine")
