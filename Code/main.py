@@ -384,11 +384,6 @@ class TicketVendingMachine:
         self.prc = self.fare_prc.get()
         self.option = self.option_var.get()
 
-        # print(self.age)
-        print(self.fare)
-        print(self.prc)
-        print(self.option)
-
         if (self.option == "Recharge" or self.option == "Recharger"):
             self.age = self.age_var.get()
             if (self.age == "Adult" or self.age == "Adulte"):
